@@ -1,0 +1,31 @@
+{
+  "name": "send-to",
+  "version": "1.0.0",
+  "author": {
+    "name": "Wolney Oliveira",
+    "email": "wolney.js@yahoo.com",
+    "url": "https://wolney.dev/"
+  },
+  "description": "A private service for wolney.dev",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "tsx watch src/server.ts",
+    "start": "tsx build/server.js",
+    "build": "tsup src --out-dir build"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "20.12.13",
+    "prisma": "5.14.0",
+    "tsup": "8.0.2",
+    "tsx": "4.11.0",
+    "typescript": "5.4.5"
+  },
+  "dependencies": {
+    "@prisma/client": "5.14.0",
+    "dotenv": "16.4.5",
+    "fastify": "4.27.0",
+    "zod": "3.23.8"
+  }
+}
