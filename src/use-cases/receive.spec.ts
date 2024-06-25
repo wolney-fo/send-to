@@ -28,6 +28,13 @@ describe("Receive Use Case", () => {
       time_to_live: 5,
     });
 
+    await correspondencesRepository.create({
+      content: "https://wolney.dev/",
+      type: "url",
+      one_time_password_hash: await hash("123", 6),
+      time_to_live: 5,
+    });
+
     const { correspondence } = await sut.execute({
       one_time_password: "123",
       type: "text",
@@ -44,9 +51,16 @@ describe("Receive Use Case", () => {
       time_to_live: 5,
     });
 
+    await correspondencesRepository.create({
+      content: "Content",
+      type: "text",
+      one_time_password_hash: await hash("123", 6),
+      time_to_live: 5,
+    });
+
     const { correspondence } = await sut.execute({
       one_time_password: "123",
-      type: "text",
+      type: "url",
     });
 
     expect(correspondence.content).toEqual("https://wolney.dev/");
@@ -69,7 +83,7 @@ describe("Receive Use Case", () => {
     await expect(() =>
       sut.execute({
         one_time_password: "123",
-        type: "url",
+        type: "text",
       })
     ).rejects.toBeInstanceOf(ExpiredCorrespondenceError);
   });
@@ -85,7 +99,7 @@ describe("Receive Use Case", () => {
     await expect(() =>
       sut.execute({
         one_time_password: "321",
-        type: "url",
+        type: "text",
       })
     ).rejects.toBeInstanceOf(InvalidCredentialsError);
   });

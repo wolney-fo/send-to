@@ -36,7 +36,15 @@ export class InMemoryCorrespondencesRepository
   }
 
   async getLatestByType(type: "url" | "text") {
-    const latestCorrespondence = this.items.reduce((latest, current) => {
+    const sameTypeCorrespondences = this.items.filter(
+      (item) => item.type === type
+    );
+
+    if (sameTypeCorrespondences.length === 0) {
+      return null;
+    }
+
+    const latestCorrespondence = sameTypeCorrespondences.reduce((latest, current) => {
       return latest.created_at > current.created_at ? latest : current;
     });
 
