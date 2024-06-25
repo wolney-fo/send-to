@@ -33,6 +33,19 @@ export class PrismaCorrespondencesRepository
     return null;
   }
 
+  async getLatestByType(type: "url" | "text") {
+    const latestCorrespondence = prisma.correspondences.findFirst({
+      where: {
+        type,
+      },
+      orderBy: {
+        created_at: "desc",
+      },
+    });
+
+    return latestCorrespondence;
+  }
+
   async create(data: Prisma.CorrespondencesCreateInput) {
     const correspondence = await prisma.correspondences.create({
       data,

@@ -1,7 +1,7 @@
 import { CorrespondencesRepository } from "../repositories/correspondences-repository";
 import { RecentCloneError } from "./errors/recent-clone";
 import { Correspondences } from "@prisma/client";
-import { compare, hash } from "bcryptjs";
+import { hash } from "bcryptjs";
 import dayjs from "dayjs";
 
 interface SubmitUseCaseRequest {

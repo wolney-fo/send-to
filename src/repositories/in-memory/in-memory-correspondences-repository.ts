@@ -35,6 +35,18 @@ export class InMemoryCorrespondencesRepository
     return null;
   }
 
+  async getLatestByType(type: "url" | "text") {
+    const latestCorrespondence = this.items.reduce((latest, current) => {
+      return latest.created_at > current.created_at ? latest : current;
+    });
+
+    if (!latestCorrespondence) {
+      return null;
+    }
+
+    return latestCorrespondence;
+  }
+
   async create(data: Prisma.CorrespondencesCreateInput) {
     const correspondence = {
       content: data.content,
