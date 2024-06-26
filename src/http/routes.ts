@@ -5,6 +5,5 @@ import { FastifyInstance } from "fastify";
 export async function appRoutes(app: FastifyInstance) {
   app.post("/send-to", submit);
 
-  app.get("/copy-it", receive);
-  app.get("/open-it", receive);
+  app.get("/receive/:type", receive);
 }

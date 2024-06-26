@@ -3,14 +3,17 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
 export async function receive(request: FastifyRequest, reply: FastifyReply) {
-  const receiveHeaderSchema = z.object({
-    one_time_password: z.string(),
+  const receiveParamsSchema = z.object({
     type: z.enum(["url", "text"]),
   });
 
-  const { one_time_password, type } = receiveHeaderSchema.parse(
-    request.headers
-  );
+  const receiveHeaderSchema = z.object({
+    one_time_password: z.string(),
+  });
+
+  const { type } = receiveParamsSchema.parse(request.params);
+
+  const { one_time_password } = receiveHeaderSchema.parse(request.headers);
 
   const receiveUseCase = makeReceiveUseCase();
 

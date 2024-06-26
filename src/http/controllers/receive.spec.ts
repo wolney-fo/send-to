@@ -24,9 +24,8 @@ describe("Receive (e2e)", () => {
     });
 
     const response = await request(app.server)
-      .get("/copy-it")
+      .get("/receive/text")
       .set("one_time_password", "123")
-      .set("type", "text")
       .send();
 
     expect(response.statusCode).toEqual(200);
@@ -43,9 +42,8 @@ describe("Receive (e2e)", () => {
     });
 
     const response = await request(app.server)
-      .get("/open-it")
+      .get("/receive/url")
       .set("one_time_password", "123")
-      .set("type", "url")
       .send();
 
     expect(response.statusCode).toEqual(200);
