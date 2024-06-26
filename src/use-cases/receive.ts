@@ -12,7 +12,7 @@ interface ReceiveUseCaseRequest {
 }
 
 interface ReceiveUseCaseResponse {
-  correspondence: Correspondences;
+  content: string;
 }
 
 export class ReceiveUseCase {
@@ -49,7 +49,9 @@ export class ReceiveUseCase {
     ) {
       throw new InvalidCredentialsError();
     }
-    
-    return { correspondence };
+
+    const { content } = correspondence;
+
+    return { content };
   }
 }

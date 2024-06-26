@@ -17,12 +17,12 @@ export async function receive(request: FastifyRequest, reply: FastifyReply) {
 
   const receiveUseCase = makeReceiveUseCase();
 
-  const { correspondence } = await receiveUseCase.execute({
+  const { content } = await receiveUseCase.execute({
     one_time_password,
     type,
   });
 
   return reply.status(200).send({
-    correspondence,
+    content,
   });
 }

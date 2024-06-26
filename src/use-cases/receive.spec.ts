@@ -35,12 +35,12 @@ describe("Receive Use Case", () => {
       time_to_live: 5,
     });
 
-    const { correspondence } = await sut.execute({
+    const { content } = await sut.execute({
       one_time_password: "123",
       type: "text",
     });
 
-    expect(correspondence.content).toEqual("Content");
+    expect(content).toEqual("Content");
   });
 
   it("should be able to receive an url correspondence", async () => {
@@ -58,12 +58,12 @@ describe("Receive Use Case", () => {
       time_to_live: 5,
     });
 
-    const { correspondence } = await sut.execute({
+    const { content } = await sut.execute({
       one_time_password: "123",
       type: "url",
     });
 
-    expect(correspondence.content).toEqual("https://wolney.dev/");
+    expect(content).toEqual("https://wolney.dev/");
   });
 
   it("should not be able to receive an expired correspondence", async () => {
