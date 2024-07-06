@@ -8,6 +8,9 @@
   },
   "description": "A private service for wolney.dev",
   "main": "index.js",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "start:dev": "tsx watch src/server.ts",
     "start": "tsx build/server.js",
