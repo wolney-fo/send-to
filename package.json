@@ -7,7 +7,7 @@
     "url": "https://wolney.dev/"
   },
   "description": "A private service for wolney.dev",
-  "main": "index.js",
+  "main": "build/server.js",
   "engines": {
     "node": ">=18"
   },
