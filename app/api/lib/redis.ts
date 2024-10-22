@@ -6,4 +6,5 @@ export const redis = new Redis({
   port: env.REDIS_PORT,
   password: env.REDIS_PASS,
   maxRetriesPerRequest: 5,
+  tls: {},
 });
