@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "3.9.0",
-    "react-hook-form": "7.53.0",
+    "react-hook-form": "7.52.1",
     "@radix-ui/react-toast": "1.2.1",
     "ioredis": "5.4.1",
     "next": "14.2.15",

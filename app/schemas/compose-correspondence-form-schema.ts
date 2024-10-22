@@ -6,7 +6,7 @@ export const composeCorrespondenceFormSchema = z.object({
   content: z
     .string()
     .min(1, { message: "A correspondence must have a content." }),
-  time_to_live: z
+  time_to_live: z.coerce
     .number()
     .min(60, { message: "TTL too short." })
     .max(thirtyMinutesInSeconds, { message: "TTL too long." }),

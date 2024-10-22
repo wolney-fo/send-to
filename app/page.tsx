@@ -1,25 +1,31 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { Form } from "./components/Form";
-import { ResponseToast } from "./components/ResponseToast";
 import {
   ComposeCorrespondenceFormSchema,
   composeCorrespondenceFormSchema,
 } from "./schemas/compose-correspondence-form-schema";
 
 export default function Home() {
-  const [toastState, setToastState] = useState(false);
-  const [toastTitle, setToastTitle] = useState("");
-  const [toastDescription, setToastDescription] = useState("");
+  const [accessUrl, setAccessUrl] = useState("");
 
   const composeCorrespondenceForm = useForm<ComposeCorrespondenceFormSchema>({
     resolver: zodResolver(composeCorrespondenceFormSchema),
   });
 
-  function onSubmit(data: ComposeCorrespondenceFormSchema) {
-    console.log(data);
+  async function onSubmit(data: ComposeCorrespondenceFormSchema) {
+    await fetch("/api/compose", {
+      method: "POST",
+      body: JSON.stringify({
+        content: data.content,
+        time_to_live: data.time_to_live,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => setAccessUrl(data.data.access_url))
+      .catch(() => alert("Erro"));
   }
 
   const {
@@ -32,7 +38,7 @@ export default function Home() {
       <FormProvider {...composeCorrespondenceForm}>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col gap-1 p-12 border w-3/4 md:w-2/4 max-w-screen-2xl mx-auto"
+          className="flex flex-col gap-1 p-12 pb-0 border w-3/4 md:w-2/4 max-w-screen-2xl mx-auto"
         >
           <h1 className="text-2xl font-bold mb-8">Send to</h1>
 
@@ -68,19 +74,15 @@ export default function Home() {
             >
               Send it
             </button>
+
+            {accessUrl && (
+              <p className="p-4 font-mono bg-slate-100 border rounded">
+                {accessUrl.slice(-6)}
+              </p>
+            )}
           </div>
         </form>
       </FormProvider>
-
-      {toastState && (
-        <ResponseToast
-          toastState={toastState}
-          onOpenChange={setToastState}
-          title={toastTitle}
-          description={toastDescription}
-          closeButton="Dismiss"
-        />
-      )}
     </main>
   );
 }
