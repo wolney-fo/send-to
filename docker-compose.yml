@@ -1,13 +1,5 @@
 services:
   redis:
-    image: bitnami/redis:latest
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
+    image: redis:8
     ports:
       - '6379:6379'
-    volumes:
-      - 'polls_redis_data:/bitnami/redis/data'
-
-volumes:
-  polls_pg_data:
-  polls_redis_data:
