@@ -52,6 +52,7 @@ This tool simplifies text transfer into a seamless, three-step flow:
 
 - [ ] Password protected shares
 - [ ] Data encryption
+- [ ] App Telemetry
 
 ## License
 
